@@ -8,11 +8,13 @@ const verificarToken = require("../middlewares/verificarToken");
 const detalharPerfil = require("../controllers/users/detalharPerfil");
 const validarCorpo = require("../middlewares/validarCorpo");
 const schemaUsuario = require("../schemas/schemaUsuario");
+const listarCategorias = require("../controllers/categoria/listarCategorias");
 
 const router = express();
 
 router.post("/usuario", validarCorpo(schemaUsuario), cadastrarUsuario);
 router.post("/login", validarLogin, loginUsuario);
+router.get("/categoria", listarCategorias);
 
 router.use(verificarToken);
 

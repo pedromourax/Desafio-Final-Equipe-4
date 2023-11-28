@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const senhaJWT = require("../senhaJwt");
 
 const verificarToken = async (req, res, next) => {
     const { authorization } = req.headers;
@@ -8,7 +7,7 @@ const verificarToken = async (req, res, next) => {
 
     try {
         const token = authorization.split(" ")[1];
-        const tokenValido = jwt.verify(token, senhaJWT);
+        const tokenValido = jwt.verify(token, process.env.SENHA_JWT);
         const { id } = tokenValido;
         req.usuario = id;
         next();

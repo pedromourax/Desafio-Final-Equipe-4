@@ -9,6 +9,9 @@ const detalharPerfil = require("../controllers/users/detalharPerfil");
 const validarCorpo = require("../middlewares/validarCorpo");
 const schemaUsuario = require("../schemas/schemaUsuario");
 const listarCategorias = require("../controllers/categoria/listarCategorias");
+const { schemaProduto } = require("../schemas/schemaProduto");
+const verificarCategoriaID = require("../middlewares/verficarCategoria");
+const cadastrarProduto = require("../controllers/product/cadastraProduto");
 
 const router = express();
 
@@ -20,5 +23,12 @@ router.use(verificarToken);
 
 router.get("/usuario", detalharPerfil);
 router.put("/usuario", validarCorpo(schemaUsuario), editarUsuario);
+
+router.post(
+  "/produto",
+  validarCorpo(schemaProduto),
+  verificarCategoriaID,
+  cadastrarProduto
+);
 
 module.exports = router;

@@ -12,6 +12,7 @@ const listarCategorias = require("../controllers/categoria/listarCategorias");
 const { schemaProduto } = require("../schemas/schemaProduto");
 const verificarCategoriaID = require("../middlewares/verficarCategoria");
 const cadastrarProduto = require("../controllers/product/cadastraProduto");
+const excluirProdutoPorId = require("../controllers/product/excluirProduto");
 
 const router = express();
 
@@ -30,5 +31,7 @@ router.post(
   verificarCategoriaID,
   cadastrarProduto
 );
+
+router.delete("/produto/:id", excluirProdutoPorId);
 
 module.exports = router;

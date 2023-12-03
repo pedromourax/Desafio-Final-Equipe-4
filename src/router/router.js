@@ -13,6 +13,7 @@ const { schemaProduto } = require("../schemas/schemaProduto");
 const verificarCategoriaID = require("../middlewares/verficarCategoria");
 const cadastrarProduto = require("../controllers/product/cadastraProduto");
 const excluirProdutoPorId = require("../controllers/product/excluirProduto");
+const listarClientes = require("../controllers/clients/listarClientes");
 
 const router = express();
 
@@ -33,5 +34,7 @@ router.post(
 );
 
 router.delete("/produto/:id", excluirProdutoPorId);
+
+router.get("/cliente", listarClientes);
 
 module.exports = router;

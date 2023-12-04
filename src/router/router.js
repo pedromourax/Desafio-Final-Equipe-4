@@ -21,6 +21,7 @@ const verificarClienteID = require("../middlewares/verificarClienteID");
 const detalharProduto = require("../controllers/product/detalharProduto");
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 
+
 const router = express();
 
 router.post("/usuario", validarCorpo(schemaUsuario), cadastrarUsuario);

@@ -19,8 +19,12 @@ const schemaCliente = require("../schemas/schemaCliente");
 const editarCliente = require("../controllers/clients/editarCliente");
 const verificarClienteID = require("../middlewares/verificarClienteID");
 const detalharProduto = require("../controllers/product/detalharProduto");
+<<<<<<< HEAD
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 
+=======
+const detalharCliente = require("../controllers/clients/detalharCliente");
+>>>>>>> 1133cf67d88394198553efe6a8cf62c683054f0b
 
 const router = express();
 
@@ -45,6 +49,12 @@ router.delete("/produto/:id", excluirProdutoPorId);
 router.get("/cliente", listarClientes);
 router.get("/produto", listarProdutos);
 router.get("/produto/:id", detalharProduto);
-router.put("/cliente/:id", verificarClienteID, validarCorpo(schemaCliente), editarCliente)
+router.put(
+  "/cliente/:id",
+  verificarClienteID,
+  validarCorpo(schemaCliente),
+  editarCliente
+);
+router.get("/cliente/:id", detalharCliente);
 
 module.exports = router;

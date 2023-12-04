@@ -19,12 +19,14 @@ const schemaCliente = require("../schemas/schemaCliente");
 const editarCliente = require("../controllers/clients/editarCliente");
 const verificarClienteID = require("../middlewares/verificarClienteID");
 const detalharProduto = require("../controllers/product/detalharProduto");
+const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 
 const router = express();
 
 router.post("/usuario", validarCorpo(schemaUsuario), cadastrarUsuario);
 router.post("/login", validarLogin, loginUsuario);
 router.get("/categoria", listarCategorias);
+router.post("/cliente", cadastrarCliente);
 
 router.use(verificarToken);
 

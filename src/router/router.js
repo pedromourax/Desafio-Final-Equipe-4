@@ -18,6 +18,7 @@ const listarProdutos = require("../controllers/product/listarProdutos");
 const schemaCliente = require("../schemas/schemaCliente");
 const editarCliente = require("../controllers/clients/editarCliente");
 const verificarClienteID = require("../middlewares/verificarClienteID");
+const detalharProduto = require("../controllers/product/detalharProduto");
 
 const router = express();
 
@@ -40,6 +41,7 @@ router.post(
 router.delete("/produto/:id", excluirProdutoPorId);
 router.get("/cliente", listarClientes);
 router.get("/produto", listarProdutos);
+router.get("/produto/:id", detalharProduto);
 router.put("/cliente/:id", verificarClienteID, validarCorpo(schemaCliente), editarCliente)
 
 module.exports = router;

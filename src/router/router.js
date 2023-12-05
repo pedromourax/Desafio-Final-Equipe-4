@@ -53,6 +53,7 @@ router.put(
   validarCorpo(schemaCliente),
   editarCliente
   );
+  
   router.get("/cliente/:id", validarID, detalharCliente);
 
   router.get("/produto/:id", validarID, detalharProduto);

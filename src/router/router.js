@@ -21,6 +21,7 @@ const verificarClienteID = require("../middlewares/verificarClienteID");
 const detalharProduto = require("../controllers/product/detalharProduto");
 const detalharCliente = require("../controllers/clients/detalharCliente");
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
+const validarID = require("../middlewares/validarId");
 
 const router = express();
 
@@ -30,8 +31,8 @@ router.get("/categoria", listarCategorias);
 
 router.use(verificarToken);
 
-router.get("/usuario", detalharPerfil);
 router.put("/usuario", validarCorpo(schemaUsuario), editarUsuario);
+router.get("/usuario", detalharPerfil);
 
 router.post(
   "/produto",
@@ -39,20 +40,22 @@ router.post(
   verificarCategoriaID,
   cadastrarProduto
 );
-
-router.delete("/produto/:id", excluirProdutoPorId);
-router.get("/cliente", listarClientes);
 router.get("/produto", listarProdutos);
 
+router.post("/cliente", cadastrarCliente);
+router.get("/cliente", listarClientes);
 
-router.get("/produto/:id", detalharProduto);
+
 router.put(
-  "/cliente/:id",
+  "/cliente/:id", 
+  validarID,
   verificarClienteID,
   validarCorpo(schemaCliente),
   editarCliente
-);
-router.get("/cliente/:id", detalharCliente);
-router.post("/cliente", cadastrarCliente);
+  );
+  router.get("/cliente/:id", validarID, detalharCliente);
+
+  router.get("/produto/:id", validarID, detalharProduto);
+  router.delete("/produto/:id", validarID, excluirProdutoPorId);
 
 module.exports = router;

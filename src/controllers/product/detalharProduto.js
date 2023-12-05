@@ -1,5 +1,4 @@
 const knex = require("../../database/conexao");
-const { message } = require("../../schemas/schemaUsuario");
 
 const detalharProduto = async (req, res) => {
     const { id } = req.params;
@@ -15,7 +14,6 @@ const detalharProduto = async (req, res) => {
 
         return res.status(200).json(produto[0]);
     } catch (error) {
-        console.log(message.error);
         return res.status(500).json({ mensagem: "Erro interno do servidor" });
     }
 }

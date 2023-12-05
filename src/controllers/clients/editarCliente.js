@@ -1,7 +1,7 @@
 const knex = require("../../database/conexao")
 
 const editarCliente = async (req, res) => {
-    const { nome, email, cpf } = req.body;
+    const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } = req.body;
     const id = req.clienteID;
 
     try {
@@ -13,8 +13,28 @@ const editarCliente = async (req, res) => {
             });
         }
 
+        const cpfExiste = await knex("clientes").where({ cpf }).first()
+
+        if (cpfExiste) {
+            return res.status(400).json({
+                mensagem: "O CPF informado já está sendo utilizado.",
+            });
+        }
+
+        const cliente = {
+            nome,
+            email,
+            cpf,
+            cep,
+            rua,
+            numero,
+            bairro,
+            cidade,
+            estado
+        }
+
         const usuarioAtualizado = await knex("clientes")
-            .update({ nome, email, cpf })
+            .update(cliente)
             .where({ id });
 
         if (!usuarioAtualizado) {

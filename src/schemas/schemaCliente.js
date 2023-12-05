@@ -17,6 +17,24 @@ const schemaCliente = joi.object({
         "string.empty": "O campo cpf não pode ser vazio",
         "string.length": "O campo cpf deve conter 11 caracteres",
     }),
+    rua: joi.string().messages({
+        "string.empty": "O campo rua não pode ser vazio",
+    }),
+    numero: joi.string().messages({
+        "string.empty": "O campo numero não pode ser vazio",
+    }),
+    cep: joi.string().messages({
+        "string.empty": "O campo cep não pode ser vazio",
+    }),
+    bairro: joi.string().messages({
+        "string.empty": "O campo bairro não pode ser vazio",
+    }),
+    cidade: joi.string().messages({
+        "string.empty": "O campo cidade não pode ser vazio",
+    }),
+    estado: joi.string().messages({
+        "string.empty": "O campo estado não pode ser vazio",
+    }),
 });
 
 module.exports = schemaCliente;

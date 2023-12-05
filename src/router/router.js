@@ -26,7 +26,7 @@ const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 const detalharCliente = require("../controllers/clients/detalharCliente");
 >>>>>>> 1133cf67d88394198553efe6a8cf62c683054f0b
 
-const router = express();
+const router = express(); 
 
 router.post("/usuario", validarCorpo(schemaUsuario), cadastrarUsuario);
 router.post("/login", validarLogin, loginUsuario);

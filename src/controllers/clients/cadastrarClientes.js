@@ -32,7 +32,7 @@ const cadastrarCliente = async (req, res) => {
 
         const clienteID = await knex("clientes").insert(cliente).returning("id");
 
-        return res.status(201).json({ mensagem: "Cliente cadastrado com sucesso!" });
+        return res.status(201).json({ mensagem: `Cliente cadastrado com sucesso! cliente ID: ${clienteID[0].id}` });
 
     } catch (error) {
         return res.status(500).json({ mensagem: "Erro interno do servidor: " + error.message });

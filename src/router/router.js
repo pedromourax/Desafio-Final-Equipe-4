@@ -51,6 +51,6 @@ router.put(
   editarCliente
 );
 router.get("/cliente/:id", detalharCliente);
-router.post("/cliente", cadastrarCliente);
+router.post("/cliente", validarCorpo(schemaCliente), cadastrarCliente);
 
 module.exports = router;

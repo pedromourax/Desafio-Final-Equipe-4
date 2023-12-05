@@ -22,6 +22,7 @@ const detalharProduto = require("../controllers/product/detalharProduto");
 const detalharCliente = require("../controllers/clients/detalharCliente");
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 const validarID = require("../middlewares/validarId");
+const editarProduto = require("../controllers/product/editarProduto");
 
 const router = express();
 
@@ -60,9 +61,10 @@ router.put(
   router.get("/produto/:id", validarID, detalharProduto);
   router.delete("/produto/:id", validarID, excluirProdutoPorId);
 
-);
+
 router.get("/cliente/:id", detalharCliente);
 router.post("/cliente", validarCorpo(schemaCliente), cadastrarCliente);
+router.put("/produto/:id", editarProduto);
 
 
 module.exports = router;

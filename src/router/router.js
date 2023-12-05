@@ -20,6 +20,7 @@ const editarCliente = require("../controllers/clients/editarCliente");
 const verificarClienteID = require("../middlewares/verificarClienteID");
 const detalharProduto = require("../controllers/product/detalharProduto");
 const detalharCliente = require("../controllers/clients/detalharCliente");
+const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 
 const router = express();
 
@@ -50,5 +51,6 @@ router.put(
   editarCliente
 );
 router.get("/cliente/:id", detalharCliente);
+router.post("/cliente", cadastrarCliente);
 
 module.exports = router;

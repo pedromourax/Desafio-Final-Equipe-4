@@ -19,19 +19,14 @@ const schemaCliente = require("../schemas/schemaCliente");
 const editarCliente = require("../controllers/clients/editarCliente");
 const verificarClienteID = require("../middlewares/verificarClienteID");
 const detalharProduto = require("../controllers/product/detalharProduto");
-<<<<<<< HEAD
+const detalharCliente = require("../controllers/clients/detalharCliente");
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 
-=======
-const detalharCliente = require("../controllers/clients/detalharCliente");
->>>>>>> 1133cf67d88394198553efe6a8cf62c683054f0b
-
-const router = express(); 
+const router = express();
 
 router.post("/usuario", validarCorpo(schemaUsuario), cadastrarUsuario);
 router.post("/login", validarLogin, loginUsuario);
 router.get("/categoria", listarCategorias);
-router.post("/cliente", cadastrarCliente);
 
 router.use(verificarToken);
 
@@ -56,5 +51,6 @@ router.put(
   editarCliente
 );
 router.get("/cliente/:id", detalharCliente);
+router.post("/cliente", cadastrarCliente);
 
 module.exports = router;

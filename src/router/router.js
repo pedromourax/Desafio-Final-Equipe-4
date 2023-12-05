@@ -43,6 +43,8 @@ router.post(
 router.delete("/produto/:id", excluirProdutoPorId);
 router.get("/cliente", listarClientes);
 router.get("/produto", listarProdutos);
+
+
 router.get("/produto/:id", detalharProduto);
 router.put(
   "/cliente/:id",

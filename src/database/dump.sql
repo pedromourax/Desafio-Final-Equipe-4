@@ -38,10 +38,10 @@ create table clientes (
     nome text not null,
     email text not null unique,
     cpf text not null unique,
-    cep int not null,
-    rua text not null,
-    numero int not null,
-    bairro text not null,
-    cidade text not null,
-    estado text not null
+    cep int,
+    rua text,
+    numero int,
+    bairro text,
+    cidade text,
+    estado text
 );

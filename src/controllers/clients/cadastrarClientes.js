@@ -4,9 +4,6 @@ const cadastrarCliente = async (req, res) => {
     const { nome, email, cpf } = req.body;
 
     try {
-        if (!nome || !email || !cpf) {
-            return res.status(400).json({ mensagem: "Todos os campos são obrigatórios." });
-        }
 
         const emailExiste = await knex("clientes").where({ email }).first();
 

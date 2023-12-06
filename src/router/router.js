@@ -43,7 +43,6 @@ router.post(
 );
 router.get("/produto", listarProdutos);
 
-router.post("/cliente", cadastrarCliente);
 router.get("/cliente", listarClientes);
 
 

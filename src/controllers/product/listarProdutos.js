@@ -2,7 +2,6 @@ const knex = require("../../database/conexao");
 
 const listarProdutos = async (req, res) => {
     const { categoria_id } = req.query
-    console.log(categoria_id)
     try {
         let produtos;
         if (!categoria_id) {

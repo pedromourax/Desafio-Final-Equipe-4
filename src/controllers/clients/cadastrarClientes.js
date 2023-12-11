@@ -27,14 +27,14 @@ const cadastrarCliente = async (req, res) => {
             bairro,
             cidade,
             estado
-
         }
 
-        const clienteID = await knex("clientes").insert(cliente).returning("id");
-
-        return res.status(201).json({ mensagem: `Cliente cadastrado com sucesso! cliente ID: ${clienteID[0].id}` });
+        const clienteID = await knex("clientes").insert(cliente).returning("*");
+        console.log(clienteID)
+        return res.status(201).json(clienteID[0]);
 
     } catch (error) {
+        console.log("teste")
         return res.status(500).json({ mensagem: "Erro interno do servidor: " + error.message });
     }
 };

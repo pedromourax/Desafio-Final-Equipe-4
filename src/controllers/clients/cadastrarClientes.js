@@ -27,12 +27,11 @@ const cadastrarCliente = async (req, res) => {
             bairro,
             cidade,
             estado
-
         }
 
-        const clienteID = await knex("clientes").insert(cliente).returning("id");
-
-        return res.status(201).json({ mensagem: `Cliente cadastrado com sucesso!` });
+        const clienteID = await knex("clientes").insert(cliente).returning("*");
+        console.log(clienteID)
+        return res.status(201).json(clienteID[0]);
 
     } catch (error) {
         console.log("teste")

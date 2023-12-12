@@ -22,6 +22,8 @@ const detalharProduto = require("../controllers/product/detalharProduto");
 const detalharCliente = require("../controllers/clients/detalharCliente");
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 const validarID = require("../middlewares/validarId");
+const editarProduto = require("../controllers/product/editarProduto");
+const multer = require("../middlewares/multer")
 
 const router = express();
 
@@ -37,26 +39,27 @@ router.get("/usuario", detalharPerfil);
 router.post(
   "/produto",
   validarCorpo(schemaProduto),
-  verificarCategoriaID,
+  verificarCategoriaID, multer.single("produto_imagem"),
   cadastrarProduto
 );
 router.get("/produto", listarProdutos);
 
-router.post("/cliente", cadastrarCliente);
 router.get("/cliente", listarClientes);
 
 
 router.put(
-  "/cliente/:id", 
+  "/cliente/:id",
   validarID,
   verificarClienteID,
   validarCorpo(schemaCliente),
   editarCliente
-  );
-  
-  router.get("/cliente/:id", validarID, detalharCliente);
+
+);
+
+router.get("/cliente/:id", validarID, detalharCliente);
 
   router.get("/produto/:id", validarID, detalharProduto);
   router.delete("/produto/:id", validarID, excluirProdutoPorId);
+>>>>>>>>> Temporary merge branch 2
 
 module.exports = router;

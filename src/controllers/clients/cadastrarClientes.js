@@ -1,12 +1,9 @@
 const knex = require("../../database/conexao");
 
 const cadastrarCliente = async (req, res) => {
-    const { nome, email, cpf } = req.body;
+    const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } = req.body;
 
     try {
-        if (!nome || !email || !cpf) {
-            return res.status(400).json({ mensagem: "Todos os campos são obrigatórios." });
-        }
 
         const emailExiste = await knex("clientes").where({ email }).first();
 
@@ -20,11 +17,24 @@ const cadastrarCliente = async (req, res) => {
             return res.status(400).json({ mensagem: "O CPF informado já está sendo utilizado." });
         }
 
-        const [clienteID] = await knex("clientes").insert({ nome, email, cpf });
+        const cliente = {
+            nome,
+            email,
+            cpf,
+            cep,
+            rua,
+            numero,
+            bairro,
+            cidade,
+            estado
+        }
 
-        return res.status(201).json({ mensagem: "Cliente cadastrado com sucesso!", clienteID });
+        const clienteID = await knex("clientes").insert(cliente).returning("*");
+        console.log(clienteID)
+        return res.status(201).json(clienteID[0]);
 
     } catch (error) {
+        console.log("teste")
         return res.status(500).json({ mensagem: "Erro interno do servidor: " + error.message });
     }
 };

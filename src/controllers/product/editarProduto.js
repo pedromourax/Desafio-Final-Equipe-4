@@ -1,9 +1,11 @@
 const knex = require("../../database/conexao");
+const uploadFile = require("../../services/uploadFile")
 
 const atualizarProduto = async (req, res) => {
     const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
-    const idProduto = req.params.id;
+    const { file } = req;
 
+    const idProduto = req.params.id;
     try {
         const produtoExiste = await knex("produtos").where({ id: idProduto }).first();
 
@@ -15,14 +17,27 @@ const atualizarProduto = async (req, res) => {
             return res.status(400).json({ mensagem: "Todos os campos são obrigatórios." });
         }
 
-        const categoriaExiste = await knex("categorias").where({ id: categoria_id }).first();
+        // const categoriaExiste = await knex("categorias").where({ id: categoria_id }).first();
 
-        if (!categoriaExiste) {
-            return res.status(400).json({ mensagem: "A categoria informada não existe." });
+        // if (!categoriaExiste) {
+        //     return res.status(400).json({ mensagem: "A categoria informada não existe." });
+        // }
+
+        let produto_imagem = undefined;
+
+        if (file) {
+            const { url } = await uploadFile(
+                `${Date.now()}-${file.originalname}`,
+                file.buffer,
+                file.mimetype
+            )
+            produto_imagem = url
         }
 
+
+
         const produtoAtualizado = await knex("produtos")
-            .update({ descricao, quantidade_estoque, valor, categoria_id })
+            .update({ descricao, quantidade_estoque, valor, categoria_id, produto_imagem })
             .where({ id: idProduto });
 
         if (!produtoAtualizado) {

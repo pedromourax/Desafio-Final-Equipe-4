@@ -37,9 +37,9 @@ router.put("/usuario", validarCorpo(schemaUsuario), editarUsuario);
 router.get("/usuario", detalharPerfil);
 
 router.post(
-  "/produto",
+  "/produto", multer.single("produto_imagem"),
+  verificarCategoriaID,
   validarCorpo(schemaProduto),
-  verificarCategoriaID, multer.single("produto_imagem"),
   cadastrarProduto
 );
 router.get("/produto", listarProdutos);
@@ -58,7 +58,24 @@ router.put(
 
 router.get("/cliente/:id", validarID, detalharCliente);
 
-  router.get("/produto/:id", validarID, detalharProduto);
-  router.delete("/produto/:id", validarID, excluirProdutoPorId);
+
+router.get("/produto/:id", validarID, detalharProduto);
+router.delete("/produto/:id", validarID, excluirProdutoPorId);
+
+router.get("/produto/:id", validarID, detalharProduto);
+router.delete("/produto/:id", validarID, excluirProdutoPorId);
+
+
+
+router.get("/cliente/:id", detalharCliente);
+router.post("/cliente", validarCorpo(schemaCliente), cadastrarCliente);
+
+router.put(
+  "/produto/:id",
+  multer.single("produto_imagem"),
+  verificarCategoriaID,
+  validarCorpo(schemaProduto),
+  editarProduto);
+
 
 module.exports = router;

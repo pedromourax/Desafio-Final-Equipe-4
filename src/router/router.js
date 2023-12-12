@@ -23,6 +23,7 @@ const detalharCliente = require("../controllers/clients/detalharCliente");
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 const validarID = require("../middlewares/validarId");
 const editarProduto = require("../controllers/product/editarProduto");
+const multer = require("../middlewares/multer")
 
 const router = express();
 
@@ -38,7 +39,7 @@ router.get("/usuario", detalharPerfil);
 router.post(
   "/produto",
   validarCorpo(schemaProduto),
-  verificarCategoriaID,
+  verificarCategoriaID, multer.single("produto_imagem"),
   cadastrarProduto
 );
 router.get("/produto", listarProdutos);

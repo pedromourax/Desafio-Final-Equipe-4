@@ -45,3 +45,5 @@ create table clientes (
     cidade text,
     estado text
 );
+
+alter table produtos add cloumn produto_imagem TEXT;

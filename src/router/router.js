@@ -23,7 +23,7 @@ const detalharCliente = require("../controllers/clients/detalharCliente");
 const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 const validarID = require("../middlewares/validarId");
 const editarProduto = require("../controllers/product/editarProduto");
-const multer = require("../middlewares/multer")
+const multer = require("../middlewares/multer");
 
 const router = express();
 

@@ -58,6 +58,10 @@ router.put(
 
 router.get("/cliente/:id", validarID, detalharCliente);
 
+
+router.get("/produto/:id", validarID, detalharProduto);
+router.delete("/produto/:id", validarID, excluirProdutoPorId);
+
 router.get("/produto/:id", validarID, detalharProduto);
 router.delete("/produto/:id", validarID, excluirProdutoPorId);
 
@@ -72,5 +76,6 @@ router.put(
   verificarCategoriaID,
   validarCorpo(schemaProduto),
   editarProduto);
+
 
 module.exports = router;

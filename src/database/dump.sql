@@ -47,3 +47,18 @@ create table clientes (
 );
 
 alter table produtos add cloumn produto_imagem TEXT;
+
+create table pedidos (
+	id serial primary key,
+    cliente_id int references clientes(id),
+    observacao text,
+    valor_total int not null
+);
+
+create table pedido_produtos(
+	id serial primary key,
+    pedido_id int references pedidos(id),
+    produto_id int references produtos(id),
+    quantidade_produto int not null,
+    valor_produto int not null
+);

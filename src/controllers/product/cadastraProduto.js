@@ -15,6 +15,28 @@ const cadastrarProduto = async (req, res) => {
       produto_imagem = url
     }
 
+    const converterDescricao = descricao.toLowerCase();
+
+    const verificarProduto = await knex("produtos")
+    .select("descricao", "quantidade_estoque")
+    .where({ descricao: converterDescricao })
+    .first();
+
+    if (verificarProduto) {
+      const novoEstoque = verificarProduto.quantidade_estoque + quantidade_estoque;
+      
+      await knex("produtos")
+      .where({ descricao: verificarProduto.descricao })
+      .update({ quantidade_estoque: novoEstoque });
+
+      const produtoAtualizado = await knex("produtos")
+      .select("*")
+      .where({ descricao: converterDescricao })
+      .first();
+
+      return res.status(200).json(produtoAtualizado);
+    }
+
     const produtos = {
       descricao,
       quantidade_estoque,

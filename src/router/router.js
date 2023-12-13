@@ -24,6 +24,9 @@ const cadastrarCliente = require("../controllers/clients/cadastrarClientes");
 const validarID = require("../middlewares/validarId");
 const editarProduto = require("../controllers/product/editarProduto");
 const multer = require("../middlewares/multer");
+const { cadastrarPedido } = require("../controllers/pedidos/cadastrarPedido");
+const { schemaPedidos } = require("../schemas/schemaPedidos");
+const { listarPedido } = require("../controllers/pedidos/listarPedido");
 
 const router = express();
 
@@ -37,7 +40,8 @@ router.put("/usuario", validarCorpo(schemaUsuario), editarUsuario);
 router.get("/usuario", detalharPerfil);
 
 router.post(
-  "/produto", multer.single("produto_imagem"),
+  "/produto",
+  multer.single("produto_imagem"),
   verificarCategoriaID,
   validarCorpo(schemaProduto),
   cadastrarProduto
@@ -46,26 +50,17 @@ router.get("/produto", listarProdutos);
 
 router.get("/cliente", listarClientes);
 
-
 router.put(
   "/cliente/:id",
   validarID,
   verificarClienteID,
   validarCorpo(schemaCliente),
   editarCliente
-
 );
-
 router.get("/cliente/:id", validarID, detalharCliente);
 
-
 router.get("/produto/:id", validarID, detalharProduto);
 router.delete("/produto/:id", validarID, excluirProdutoPorId);
-
-router.get("/produto/:id", validarID, detalharProduto);
-router.delete("/produto/:id", validarID, excluirProdutoPorId);
-
-
 
 router.get("/cliente/:id", detalharCliente);
 router.post("/cliente", validarCorpo(schemaCliente), cadastrarCliente);
@@ -75,7 +70,10 @@ router.put(
   multer.single("produto_imagem"),
   verificarCategoriaID,
   validarCorpo(schemaProduto),
-  editarProduto);
+  editarProduto
+);
 
+router.post("/pedido", validarCorpo(schemaPedidos), cadastrarPedido);
+router.get("/pedido", listarPedido);
 
 module.exports = router;

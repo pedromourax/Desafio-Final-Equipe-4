@@ -1,8 +1,18 @@
 const knex = require("../../database/conexao");
+const deleteFile = require("../../services/deleteFile");
 
 const excluirProdutoPorId = async (req, res) => {
   const { id } = req.params;
   try {
+    const verificarProduto = await knex("pedido_produtos")
+      .select("produto_id")
+      .where({ produto_id: id });
+
+    if (verificarProduto.length > 0) {
+      console.log("Produto vinculado a pedidos. Impedindo exclusão.");
+      return res.status(404).json({ mensagem: "Operação inválida. O produto informado está vinculado a um ou mais pedidos." });
+    }
+
     const produtoEncontrado = await knex("produtos")
       .where({ id })
       .first()
